@@ -1,15 +1,15 @@
 import { Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import './App.css'
+import './StartPage.css'
 
 const StartPage = () => {
     const history = useHistory();
     const onClickHandler = () => {
-        history.push('game/')
+        history.push('/game');
     }
     return (
         <div>
-            <Button title="Game Start" onClick={() => onClickHandler()}/>
+            <Button className='start_button' onClick={() => onClickHandler()}>Game Start</Button>
         </div>
     )
 }
