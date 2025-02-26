@@ -9,6 +9,9 @@ import java.util.ArrayList;
 public class PokemonService {
 
     public ArrayList<Pokemon> getPokemon() {
-        return null;
+        ArrayList<Pokemon> pokeArray = new ArrayList<>();
+        Pokemon poke = new Pokemon(1l, "balbusar", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/132.png");
+        pokeArray.add(poke);
+        return pokeArray;
     }
 }
