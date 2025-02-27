@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("pokemon")
+@RequestMapping("/pokemon")
 @CrossOrigin
 public class PokemonController {
 

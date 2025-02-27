@@ -12,6 +12,9 @@ public class Pokemon {
         this.image = image;
     }
 
+    public Pokemon() {
+
+    }
 
     public Long getId() {
         return id;

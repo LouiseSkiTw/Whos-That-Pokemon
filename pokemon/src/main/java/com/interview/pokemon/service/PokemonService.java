@@ -1,6 +1,8 @@
 package com.interview.pokemon.service;
 
+import com.interview.pokemon.client.GetPokemonClient;
 import com.interview.pokemon.model.Pokemon;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -8,10 +10,14 @@ import java.util.ArrayList;
 @Service
 public class PokemonService {
 
+    @Autowired
+    private GetPokemonClient getPokemonClient;
+
     public ArrayList<Pokemon> getPokemon() {
         ArrayList<Pokemon> pokeArray = new ArrayList<>();
-        Pokemon poke = new Pokemon(1l, "balbusar", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/132.png");
-        pokeArray.add(poke);
+        pokeArray.add(getPokemonClient.getPokemon());
+        System.out.println(pokeArray);
         return pokeArray;
     }
+
 }
