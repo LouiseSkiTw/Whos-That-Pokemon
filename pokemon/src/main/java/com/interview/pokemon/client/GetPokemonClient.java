@@ -37,7 +37,7 @@ public class GetPokemonClient {
         Pokemon pokemon = new Pokemon();
         pokemon.setId(rootNode.path("id").asLong());
         pokemon.setName(rootNode.path("name").asText());
-        pokemon.setImage(rootNode.path("forms").path("default_back").asText());
+        pokemon.setImage(rootNode.path("sprites").path("front_default").asText());
         return pokemon;
     }
 }
