@@ -12,12 +12,12 @@ import java.net.http.HttpResponse;
 
 public class GetPokemonClient {
 
-    private static final String API_URL = "https://pokeapi.co/api/v2/pokemon/35";
+    private static final String API_URL = "https://pokeapi.co/api/v2/pokemon/";
 
-    public Pokemon getPokemon() {
+    public Pokemon getPokemon(int index) {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(API_URL))
+                .uri(URI.create(API_URL+index))
                 .build();
 
         try {

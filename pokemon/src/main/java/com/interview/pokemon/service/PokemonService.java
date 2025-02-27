@@ -15,7 +15,9 @@ public class PokemonService {
 
     public ArrayList<Pokemon> getPokemon() {
         ArrayList<Pokemon> pokeArray = new ArrayList<>();
-        pokeArray.add(getPokemonClient.getPokemon());
+        for (int i = 1; i <= 50; i++) {
+            pokeArray.add(getPokemonClient.getPokemon(i));
+        }
         System.out.println(pokeArray);
         return pokeArray;
     }
