@@ -5,7 +5,7 @@ import Game from "./pages/Game";
 const Routes = () => (
     <Switch>
         <Route exact path='/' render={()=> <StartPage />} />
-        <Route path='/game/' render={() => <Game />} />
+        <Route path='/game' render={() => <Game />} />
     </Switch>
 )
 

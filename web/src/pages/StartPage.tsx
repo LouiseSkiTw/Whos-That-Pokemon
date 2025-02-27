@@ -5,8 +5,7 @@ import './StartPage.css'
 const StartPage = () => {
     const history = useHistory();
     const onClickHandler = () => {
-        console.log("I have been clicked")
-        history.push('/game/');
+        history.push('/game');
     }
     return (
         <div>

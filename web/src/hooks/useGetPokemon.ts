@@ -4,7 +4,7 @@ import { Pokemon } from '../service/PokemonService.interface';
 
 
 const useGetPokemon = () => {
-  const [data, setData] = useState<Pokemon | null>(null);
+  const [data, setData] = useState<Pokemon[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -30,3 +30,4 @@ const useGetPokemon = () => {
 };
 
 export default useGetPokemon;
+

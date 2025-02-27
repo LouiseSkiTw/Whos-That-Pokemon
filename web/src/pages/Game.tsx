@@ -1,4 +1,4 @@
-import { Spinner } from "react-bootstrap";
+import { Card, Spinner } from "react-bootstrap";
 import useGetPokemon from "../hooks/useGetPokemon";
 
 const Game = () => {
@@ -7,7 +7,12 @@ const Game = () => {
     if (error) return <div>Error: {error}</div>;
     return(
         <div>
-            <h1>{data?.name}</h1>
+                 <Card>
+                    {data && <Card.Img src={data[0].image}/>}
+                    <Card.Body>
+                        {data && <Card.Title>{data[0].name} </Card.Title>}
+                    </Card.Body>
+                </Card>
         </div>
     )
 }
