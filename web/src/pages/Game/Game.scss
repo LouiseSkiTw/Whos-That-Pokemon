@@ -2,24 +2,41 @@
     width: 500px;
 }
 
-.title
-
-.silhouette {
+.title .silhouette {
     fill: black;
 }
 
 .container {
     border: white 2px solid;
+}
 
-    .questions {
-      padding-bottom: 10px; 
-    }
+.questions {
+    padding-bottom: 10px;
+    border: white 2px solid;
+}
 
-    .question {
-        margin: 2px;
-    }
+.question {
+    margin: 2px;
+    border: white 2px solid;
 
-    .game{
-        display: inline;
-    }
+}
+
+.option {
+    display: block;
+}
+
+.option:hover {
+    background-color: #7e7e7e;
+    ;
+}
+
+
+.option:nth-child(even) {
+    background-color: #141414;
+
+}
+
+.option:nth-child(odd) {
+    background-color: #3f3e3e;
+
 }
