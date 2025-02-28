@@ -61,12 +61,12 @@ const Game = () => {
 const getStyleArray = (index:number, value:number) => {
     const getElement = value == randomPokemonIndex;
     const userSelectionIndex = optionSelection?.index === index;
-    const styleArray = ["option"];
+    let styleArray = ["option"];
     if (!submit && userSelectionIndex){
         styleArray.push("selected");
     }
-    if(submit && pokemonFound && getElement){
-        styleArray.push("sucesses")
+    if(submit && getElement ){
+        styleArray.push("success")
     }
 
     if(submit && !pokemonFound && userSelectionIndex) {
@@ -84,7 +84,6 @@ const displayOptions = () => (
                 onClick={() => {
                     setOptionSelection({name: data[value].name, index});
                     setHasSelectedResponse(!hasSelectedResponse);
-                    getStyleArray(index, value)
                 }}
             >
             {capitalizeFirstLetter(data[value].name)}

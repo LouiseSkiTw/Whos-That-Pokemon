@@ -5,6 +5,7 @@
     height: 20rem;
     margin-bottom: 3rem;
 }
+
 .silhouette {
     width: 20rem;
     height: 20rem;
@@ -12,12 +13,12 @@
     filter: brightness(0);
 }
 
-.text{
+.text {
     color: black;
 }
 
-.show{
-  
+.show {
+
     filter: brightness(100);
     transition: all 0.7s ease-in-out;
 }
@@ -29,41 +30,47 @@
 }
 
 
-    .container {
-        border: $pokemon_yellow 2px solid;
+.container {
+    border: $pokemon_yellow 2px solid;
 
 
-        .questions {
-            padding-bottom: 10px;
-            border: white 2px solid;
-        }
-
-        .question {
-            margin: 2px;
-            border: white 2px solid;
-        }
-
+    .questions {
+        padding-bottom: 10px;
+        border: white 2px solid;
     }
 
-    .option {
-        display: block;
-        padding: 10px 0;
+    .question {
+        margin: 2px;
+        border: white 2px solid;
     }
 
-    .option:nth-child(even) {
-        background-color: #141414;
-    }
+}
 
-    .option:nth-child(even):hover,
-    .option:nth-child(odd):hover {
-        background-color: $pokemon_blue;
-        color: $pokemon_yellow;
+.option {
+    display: block;
+    padding: 10px 0;
+    color: black;
+    border: 2px black solid ;
+    
+    &.fail {
+        background-color: $fail;
     }
+    
+    &.success {
+        background-color: $success;
+    }
+}
 
-    .option:nth-child(odd) {
-        background-color: #3f3e3e;
-    }
+.selected {
+    background-color: $pokemon_blue;
+    color: $pokemon_yellow;
+}
+.option:nth-child(even):hover,
+.option:nth-child(odd):hover {
+    background-color: $pokemon_blue;
+    color: $pokemon_yellow;
+}
 
-    .button{
-        @include button-styles();
-    }
+.button {
+    @include button-styles();
+}
