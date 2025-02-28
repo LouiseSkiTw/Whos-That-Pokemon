@@ -9,7 +9,7 @@ const StartPage = () => {
     }
     return (
         <div>
-            <Button className='start_button' onClick={() => onClickHandler()}>Game Start</Button>
+            <Button className='start_button' onClick={onClickHandler}>Game Start</Button>
         </div>
     )
 }
