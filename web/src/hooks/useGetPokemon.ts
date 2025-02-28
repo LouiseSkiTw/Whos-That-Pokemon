@@ -4,7 +4,7 @@ import { Pokemon } from '../service/PokemonService.interface';
 
 
 const useGetPokemon = () => {
-  const [data, setData] = useState<Pokemon[] | undefined>(undefined);
+  const [data, setData] = useState<Pokemon[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>(undefined);
 
