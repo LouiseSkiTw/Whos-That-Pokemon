@@ -3,6 +3,7 @@ package com.interview.pokemon.controller;
 import com.interview.pokemon.model.Pokemon;
 import com.interview.pokemon.service.PokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,11 @@ public class PokemonController {
 
     @GetMapping("/getAll")
     public ArrayList<Pokemon> WhoIsThatPokemon() {
-        return pokemonService.getPokemon();
+        ArrayList<Pokemon> pokemon = pokemonService.getPokemon();
+        if(pokemon.isEmpty()) {ResponseEntity.badRequest();
+        }
+
+        return ResponseEntity.ok(pokemon).getBody();
     }
 
 }
