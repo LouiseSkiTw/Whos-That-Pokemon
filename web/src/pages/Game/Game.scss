@@ -1,61 +1,75 @@
 @import '../../assets/_variables.scss';
 
+.container {
+    @include container();
+}
+
+.title {
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    font-family: $font-family-fantasy;
+    background-color: red;
+}
+
+.spinner_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    border: 1px solid black;
+
+    .spinner {
+        width: $max-width/4;
+        height: $max-width/4;
+    }
+}
+
+.score {
+    font-size: medium;
+    font-weight: 400;
+}
+
 .img {
-    width: 20rem;
-    height: 20rem;
-    margin-bottom: 3rem;
+    display: flex;
+    width: 250px;
+    height: 200px;
+    justify-self: center;
+    align-self: center;  
 }
 
 .silhouette {
-    width: 20rem;
-    height: 20rem;
-    margin-bottom: 3rem;
+    width: 250px;
+    height: 200px;
     filter: brightness(0);
-}
-
-.text {
-    color: black;
-}
+}   
 
 .show {
-
-    filter: brightness(100);
-    transition: all 0.7s ease-in-out;
+    filter: brightness(100%);
+    transition: all 0.9s ease-in-out;
 }
 
 .game {
-    width: 500px;
-    height: 600px;
-    background-color: white;
-}
-
-
-.container {
-    border: $pokemon_yellow 2px solid;
-
-
-    .questions {
-        padding-bottom: 10px;
-        border: white 2px solid;
-    }
-
-    .question {
-        margin: 2px;
-        border: white 2px solid;
-    }
-
+    width: 1000px;
+    display: flex;
+    justify-self: center;
+    align-self: center;  
+    max-height: 600px;
 }
 
 .option {
     display: block;
-    padding: 10px 0;
+    padding: 8px 0;
     color: black;
-    border: 2px black solid ;
-    
+    border-radius: 12px;
+    text-align: center;
+    background-color: $pokemon_blue;
+    color: $pokemon_yellow;
+
     &.fail {
         background-color: $fail;
     }
-    
+
     &.success {
         background-color: $success;
     }
@@ -65,12 +79,15 @@
     background-color: $pokemon_blue;
     color: $pokemon_yellow;
 }
+
 .option:nth-child(even):hover,
 .option:nth-child(odd):hover {
-    background-color: $pokemon_blue;
-    color: $pokemon_yellow;
+    background-color: black;
+    color: white;
 }
 
 .button {
     @include button-styles();
+    width: 1000px;
+    border-radius: 12px;
 }

@@ -3,6 +3,11 @@ $pokemon_blue: #3160B4;
 $success: #28a745;
 $fail: #ff0707;
 
+$max-width: 1280px;
+
+$font-family-fantasy: fantasy;
+
+
 @mixin button-styles($width: 500px, $box-shadow-color: $pokemon_blue, $bg-color: #1a1a1a) {
     width: $width;
     box-shadow: 5px 10px 8px $box-shadow-color;
@@ -12,4 +17,12 @@ $fail: #ff0707;
     background-color: $bg-color;
     cursor: pointer;
     transition: border-color 0.25s;
+}
+
+@mixin container{
+    max-width: $max-width;
+    padding: 2rem;
+    color-scheme: light dark;
+    color: $pokemon_yellow; 
+    background-color: $pokemon_blue;
 }

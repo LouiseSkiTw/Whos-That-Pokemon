@@ -3,6 +3,7 @@ import useGetPokemon from "../../hooks/useGetPokemon";
 import cx from 'classnames'
 import React from "react";
 import './Game.scss'
+import "bootstrap/dist/css/bootstrap.min.css"
 import { capitalizeFirstLetter, getRandomNumber } from "../../utils/utils";
 
 
@@ -20,7 +21,7 @@ const Game = () => {
     const [nextGame, setNextGame] = React.useState(false);
 
     
-    const displaySilhouette = !submit ? cx("img", "silhouette") : cx("img");
+    const displaySilhouette = !submit ? cx("img", "silhouette") : cx("img", "show");
     
     const { data, isLoading, error } = useGetPokemon();
     const pokemonFound = optionSelection?.name === data[randomPokemonIndex]?.name;
@@ -76,7 +77,7 @@ const getStyleArray = (index:number, value:number) => {
     return cx(styleArray); 
 }
 const displayOptions = () => (
-    (<div className="question">
+    (<div>
         {data && selectedNumbers.map((value,index) =>
             <Card.Title
                 key={data[value].id}
@@ -92,7 +93,10 @@ const displayOptions = () => (
     </div>)
 )
 
-    if (isLoading) return <div><Spinner animation="border" role="status">Loading...</Spinner></div>;
+    if (isLoading) return(
+    <div className="spinner_container">
+        <Spinner className="spinner" animation="border"/>
+        </div>);
     if (error) return <div>Error: {error}</div>;
 
     return (
@@ -100,24 +104,23 @@ const displayOptions = () => (
             {data && data.length > 0 && score < 10 &&
                 <>
                     <div>
-                        <h4>Score: {score}/10</h4>
+                        <h4 className="score">Score: {score}/10</h4>
                     </div>
                     <Card className="game">
                         <Card.Title className="title">Who's That Pokemon?</Card.Title>
                         <Card.Img className={displaySilhouette} src={data[randomPokemonIndex].image} />
-                        <Card.Body>
+                      
                             {<div className="questions">
                                 {displayOptions()}
                             </div>}
-                        </Card.Body>
-                    </Card>
                     {!submit && <Button className="button" disabled={!hasSelectedResponse} onClick={() => onClickCheckResult()}>Submit</Button>}
                     {submit && <Button className="button" onClick={() => onClickNextGame()}>Next</Button>}
+                    </Card>
                 </>
             }
-            <Card>
-                {score == 10 && <Card.Text>Your Score was {score}/10</Card.Text>}
-            </Card>
+            {score == 10 && <Card>
+                <Card.Text>Your Score was {score}/10</Card.Text>
+            </Card>}
         </div>
     )
 }
