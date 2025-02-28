@@ -12,6 +12,10 @@
     filter: brightness(0);
 }
 
+.text{
+    color: black;
+}
+
 .show{
   
     filter: brightness(100);
@@ -58,4 +62,8 @@
 
     .option:nth-child(odd) {
         background-color: #3f3e3e;
+    }
+
+    .button{
+        @include button-styles();
     }
