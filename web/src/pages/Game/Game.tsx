@@ -16,8 +16,8 @@ const Game = () => {
     const [randomPokemonIndex, setRandomPokemonIndex] = React.useState(0);
     const [score, setScore] = React.useState(0);
     const [optionSelection, setOptionSelection] = React.useState<string>();
-    const[ submit, setSubmitted ] = React.useState(false);
-    const[ nextGame, setNextGame ] = React.useState(false);
+    const [submit, setSubmitted] = React.useState(false);
+    const [nextGame, setNextGame] = React.useState(false);
 
     const displaySilhouette = !submit ? cx("img", "silhouette") : cx("img");
 
@@ -28,12 +28,12 @@ const Game = () => {
         let newSelectedNumbers = [...selectedNumbers]; // Start with the current array
         for (let index = 0; newSelectedNumbers.length < 4; index++) {
             const randomNumber = getRandomNumber();
-            if(!newSelectedNumbers.includes(randomNumber)) {
+            if (!newSelectedNumbers.includes(randomNumber)) {
                 newSelectedNumbers.push(randomNumber);
             }
         }
         setSelectedNumbers(newSelectedNumbers); // Update state after array is built
-        const randomIndex = newSelectedNumbers[Math.floor(Math.random()* newSelectedNumbers.length)];
+        const randomIndex = newSelectedNumbers[Math.floor(Math.random() * newSelectedNumbers.length)];
         setRandomPokemonIndex(randomIndex);
 
     }, [nextGame]);
@@ -48,51 +48,77 @@ const Game = () => {
 
     const onClickNextGame = () => {
         setNextGame(!nextGame)
+        setSubmitted(!submit)
+        setHasSelectedResponse(!hasSelectedResponse)
     }
+    // {data && selectedNumbers.map((value, index) => {
+    //     let styleArray = ["options"];
+    //     const pokemonFound = data[randomPokemonIndex].name == optionSelection.name ? "success" : "fail";
+    //     if (index == optionSelection.index) {
+    //         styleArray.push(pokemonFound)
+    //     }
+    //     return (<Card.Title
+    //         key={data[value].id}
+    //         className={cx("options")}
+    //         onClick={() => {
+    //             setOptionSelection({
+    //                 name: data[value].name,
+    //                 index: index,
+    //             });
+    //             setHasSelectedResponse(!hasSelectedResponse);
+    //             styleArray.push("selected")
+    //         }}
+    //     >
+    //         {capitalizeFirstLetter(data[value].name)}
+    //     </Card.Title>
+    //     )
+    // }
+    // )}
+// </div>
 
-
-
-    const displayOptions = () => (
-        <div className="question">
-            {data && selectedNumbers.map(value =>
-                <Card.Title
-                    key={data[value].id}
-                    className="option"
-                    onClick={() => {
-                        setOptionSelection(data[value].name);
-                        setHasSelectedResponse(!hasSelectedResponse);
-                    }}
-                >
-                {capitalizeFirstLetter(data[value].name)}
-                </Card.Title>
-            )}
-        </div>
-    )
+const displayOptions = () => (
+    <div className="question">
+        {data && selectedNumbers.map(value =>
+            <Card.Title
+                key={data[value].id}
+                className="option"
+                onClick={() => {
+                    setOptionSelection(data[value].name);
+                    setHasSelectedResponse(!hasSelectedResponse);
+                }}
+            >
+            {capitalizeFirstLetter(data[value].name)}
+            </Card.Title>
+        )}
+    </div>
+)
 
     if (isLoading) return <div><Spinner animation="border" role="status">Loading...</Spinner></div>;
     if (error) return <div>Error: {error}</div>;
 
     return (
         <div className="container">
-            {data && data.length > 0 &&
-            <>
-                <div>
-                    <h4>Score: {score}/10</h4>
-                </div>
-                <Card className="game">
-                    <Card.Title className="title">Who's That Pokemon?</Card.Title>
-                    <Card.Img className={displaySilhouette} src={data[randomPokemonIndex].image}/>
-                    <Card.Body>
-                        {!submit && <div className="questions">
-                            {displayOptions()}
-                        </div>}
-                        {submit && <div><h1>{data[randomPokemonIndex].name}</h1></div>}
-                    </Card.Body>
-                </Card>
-                {!submit && <Button disabled={!hasSelectedResponse} onClick={() => onClickCheckResult()}>Submit</Button>}
-                {submit && <Button onClick={() => onClickNextGame()}>Next</Button>}
-            </>
-           }
+            {data && data.length > 0 && score < 10 &&
+                <>
+                    <div>
+                        <h4>Score: {score}/10</h4>
+                    </div>
+                    <Card className="game">
+                        <Card.Title className="title">Who's That Pokemon?</Card.Title>
+                        <Card.Img className={displaySilhouette} src={data[randomPokemonIndex].image} />
+                        <Card.Body>
+                            {<div className="questions">
+                                {displayOptions()}
+                            </div>}
+                        </Card.Body>
+                    </Card>
+                    {!submit && <Button className="button" disabled={!hasSelectedResponse} onClick={() => onClickCheckResult()}>Submit</Button>}
+                    {submit && <Button className="button" onClick={() => onClickNextGame()}>Next</Button>}
+                </>
+            }
+            <Card>
+                {score == 10 && <Card.Text>Your Score was {score}/10</Card.Text>}
+            </Card>
         </div>
     )
 }
