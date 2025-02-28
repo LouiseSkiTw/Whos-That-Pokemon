@@ -1,47 +1,61 @@
+@import '../../assets/_variables.scss';
+
 .img {
-    margin-top: 8px;
-    width: inherit;
+    width: 20rem;
+    height: 20rem;
+    margin-bottom: 3rem;
+}
+.silhouette {
+    width: 20rem;
+    height: 20rem;
+    margin-bottom: 3rem;
+    filter: brightness(0);
+}
+
+.show{
+  
+    filter: brightness(100);
+    transition: all 0.7s ease-in-out;
+}
+
+.game {
+    width: 500px;
+    height: 600px;
     background-color: white;
 }
 
-.silhouette {
-    fill: black;
-}
 
-.game{
-    width: 500px;
-    height: 1000px;
-}
-
-.container {
-    border: white 2px solid;
+    .container {
+        border: $pokemon_yellow 2px solid;
 
 
-.questions {
-    padding-bottom: 10px;
-    border: white 2px solid;
-}
+        .questions {
+            padding-bottom: 10px;
+            border: white 2px solid;
+        }
 
-.question {
-    margin: 2px;
-    border: white 2px solid;
+        .question {
+            margin: 2px;
+            border: white 2px solid;
+        }
 
-}
+    }
 
-}
+    .option {
+        display: block;
+        padding: 10px 0;
+    }
 
-.option {
-    display: block;
-    padding: 10px 0;
-}
+    .option:nth-child(even) {
+        background-color: #141414;
+    }
 
-.option:nth-child(even) {
-    background-color: #141414;
-}
-.option:nth-child(even):hover, .option:nth-child(odd):hover {
-    background-color: red;
-}
+    .option:nth-child(even):hover,
+    .option:nth-child(odd):hover {
+        background-color: $pokemon_blue;
+        color: $pokemon_yellow;
+    }
 
-.option:nth-child(odd)  {
-    background-color: #3f3e3e;
-}
+    .option:nth-child(odd) {
+        background-color: #3f3e3e;
+    }

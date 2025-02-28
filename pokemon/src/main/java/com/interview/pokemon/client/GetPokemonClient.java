@@ -13,9 +13,9 @@ import java.net.http.HttpResponse;
 public class GetPokemonClient {
 
     private static final String API_URL = "https://pokeapi.co/api/v2/pokemon/";
+    private final HttpClient client = HttpClient.newHttpClient();
 
     public Pokemon getPokemon(int index) {
-        HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(API_URL+index))
                 .build();
@@ -35,6 +35,7 @@ public class GetPokemonClient {
 
     private Pokemon mapResponseToObject(JsonNode rootNode, String jsonResponse) {
         Pokemon pokemon = new Pokemon();
+        System.out.println("LOVE DIVE");
         pokemon.setId(rootNode.path("id").asLong());
         pokemon.setName(rootNode.path("name").asText());
         pokemon.setImage(rootNode.path("sprites").path("front_default").asText());
