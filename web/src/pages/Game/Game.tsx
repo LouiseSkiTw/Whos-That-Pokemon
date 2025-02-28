@@ -15,13 +15,15 @@ const Game = () => {
     const [selectedNumbers, setSelectedNumbers] = React.useState<number[]>([])
     const [randomPokemonIndex, setRandomPokemonIndex] = React.useState(0);
     const [score, setScore] = React.useState(0);
-    const [optionSelection, setOptionSelection] = React.useState<string>();
+    const [optionSelection, setOptionSelection] = React.useState<{name: string, index: number}>();
     const [submit, setSubmitted] = React.useState(false);
     const [nextGame, setNextGame] = React.useState(false);
 
+    
     const displaySilhouette = !submit ? cx("img", "silhouette") : cx("img");
-
+    
     const { data, isLoading, error } = useGetPokemon();
+    const pokemonFound = optionSelection?.name === data[randomPokemonIndex]?.name;
 
 
     React.useEffect(() => {
@@ -35,62 +37,60 @@ const Game = () => {
         setSelectedNumbers(newSelectedNumbers); // Update state after array is built
         const randomIndex = newSelectedNumbers[Math.floor(Math.random() * newSelectedNumbers.length)];
         setRandomPokemonIndex(randomIndex);
-
-    }, [nextGame]);
+        setNextGame(false);
+    }, [nextGame === true]);
 
     const onClickCheckResult = () => {
-        if (data && data[randomPokemonIndex].name == optionSelection) {
+        if (data && pokemonFound) {
             setScore(score + 1);
         }
-        setHasSelectedResponse(!hasSelectedResponse);
-        setSubmitted(!submit)
+        setSubmitted(!submit);
     }
 
     const onClickNextGame = () => {
-        setNextGame(!nextGame)
-        setSubmitted(!submit)
-        setHasSelectedResponse(!hasSelectedResponse)
-    }
-    // {data && selectedNumbers.map((value, index) => {
-    //     let styleArray = ["options"];
-    //     const pokemonFound = data[randomPokemonIndex].name == optionSelection.name ? "success" : "fail";
-    //     if (index == optionSelection.index) {
-    //         styleArray.push(pokemonFound)
-    //     }
-    //     return (<Card.Title
-    //         key={data[value].id}
-    //         className={cx("options")}
-    //         onClick={() => {
-    //             setOptionSelection({
-    //                 name: data[value].name,
-    //                 index: index,
-    //             });
-    //             setHasSelectedResponse(!hasSelectedResponse);
-    //             styleArray.push("selected")
-    //         }}
-    //     >
-    //         {capitalizeFirstLetter(data[value].name)}
-    //     </Card.Title>
-    //     )
-    // }
-    // )}
-// </div>
+        setSubmitted(!submit);
+        setHasSelectedResponse(!hasSelectedResponse);
+        setNextGame(!nextGame);
+        setRandomPokemonIndex(0);
+        setSelectedNumbers([]);     
 
+    }
+
+
+
+const getStyleArray = (index:number, value:number) => {
+    const getElement = value == randomPokemonIndex;
+    const userSelectionIndex = optionSelection?.index === index;
+    const styleArray = ["option"];
+    if (!submit && userSelectionIndex){
+        styleArray.push("selected");
+    }
+    if(submit && pokemonFound && getElement){
+        styleArray.push("sucesses")
+    }
+
+    if(submit && !pokemonFound && userSelectionIndex) {
+        styleArray.push("fail")
+    }
+
+    return cx(styleArray); 
+}
 const displayOptions = () => (
-    <div className="question">
-        {data && selectedNumbers.map(value =>
+    (<div className="question">
+        {data && selectedNumbers.map((value,index) =>
             <Card.Title
                 key={data[value].id}
-                className="option"
+                className={getStyleArray(index, value)}
                 onClick={() => {
-                    setOptionSelection(data[value].name);
+                    setOptionSelection({name: data[value].name, index});
                     setHasSelectedResponse(!hasSelectedResponse);
+                    getStyleArray(index, value)
                 }}
             >
             {capitalizeFirstLetter(data[value].name)}
             </Card.Title>
         )}
-    </div>
+    </div>)
 )
 
     if (isLoading) return <div><Spinner animation="border" role="status">Loading...</Spinner></div>;
