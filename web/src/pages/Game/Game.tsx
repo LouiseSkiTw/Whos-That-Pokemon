@@ -10,6 +10,7 @@ const Game = () => {
     const [hasSelectedResponse, setHasSelectedResponse] = React.useState(false);
     const [selectedNumbers, setSelectedNumbers] = React.useState<number[]>([])
     const [randomPokemonIndex, setRandomPokemonIndex] = React.useState(0);
+    const [score, setScore] = React.useState(0);
     const displaySilhouette = !hasSelectedResponse ? cx("card", "img", "silhouette") : cx("card", "img");
 
     React.useEffect(() => {
@@ -21,25 +22,36 @@ const Game = () => {
             }
         }
         setSelectedNumbers(newSelectedNumbers); // Update state after array is built
-        setRandomPokemonIndex(newSelectedNumbers[Math.floor(Math.random()* newSelectedNumbers.length)]);
+        const randomIndex = newSelectedNumbers[Math.floor(Math.random()* newSelectedNumbers.length)];
+        setRandomPokemonIndex(randomIndex);
 
-    }, []);
+    }, [hasSelectedResponse]);
 
     if (isLoading) return <div><Spinner animation="border" role="status">Loading...</Spinner></div>;
     if (error) return <div>Error: {error}</div>;
 
+    const onClickHandler = (selection: string) => {
+        setSelectedNumbers([]);
+        setHasSelectedResponse(!hasSelectedResponse);
+        if(data && data[randomPokemonIndex].name == selection) {
+            setScore(score + 1);
+
+        }
+    }
+
     const displayOptions = () => (
         <div className="question">
             {selectedNumbers.map(value =>
-                <Card.Title className="option" onClick={() => setHasSelectedResponse(!hasSelectedResponse)}>{data && data[value].name}</Card.Title>
+                <Card.Title className="option" onClick={() => onClickHandler(data[value].name)}>{data && data[value].name}</Card.Title>
             )}
         </div>
     )
 
     return (
         <div className="container">
+            <div><h4>Score: {score}/10</h4></div>
             <Card>
-                {data && <Card.Img className={displaySilhouette} src={data[selectedNumbers[0]].image} />}
+                {data && <Card.Img className={displaySilhouette} src={data[randomPokemonIndex].image} />}
                 <Card.Title className="title">Who's That Pokemon?</Card.Title>
                 <Card.Body>
                     <div className="questions">

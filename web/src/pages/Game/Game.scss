@@ -25,18 +25,17 @@
     display: block;
 }
 
-.option:hover {
-    background-color: #7e7e7e;
-    ;
-}
-
-
 .option:nth-child(even) {
     background-color: #141414;
-
+}
+.option:nth-child(even):hover {
+    background-color: red;
 }
 
 .option:nth-child(odd) {
     background-color: #3f3e3e;
+}
 
+.option:nth-child(odd):hover {
+    background-color: blue;
 }
