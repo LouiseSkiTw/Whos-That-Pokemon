@@ -21,9 +21,7 @@ const Game = () => {
             }
         }
         setSelectedNumbers(newSelectedNumbers); // Update state after array is built
-        const randomIndex = newSelectedNumbers[Math.floor(Math.random()* newSelectedNumbers.length)];
-        setRandomPokemonIndex(randomIndex);
-        console.log(randomPokemonIndex);
+        setRandomPokemonIndex(newSelectedNumbers[Math.floor(Math.random()* newSelectedNumbers.length)]);
 
     }, []);
 
