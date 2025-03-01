@@ -4,7 +4,8 @@ import cx from 'classnames'
 import React from "react";
 import './Game.scss'
 import "bootstrap/dist/css/bootstrap.min.css"
-import { capitalizeFirstLetter, getRandomNumber } from "../../utils/utils";
+import { capitalizeFirstLetter } from "../../utils/utils";
+import { useHistory } from "react-router-dom";
 
 
 // Fix Spinner
@@ -13,34 +14,22 @@ import { capitalizeFirstLetter, getRandomNumber } from "../../utils/utils";
 
 const Game = () => {
     const [hasSelectedResponse, setHasSelectedResponse] = React.useState(false);
-    const [selectedNumbers, setSelectedNumbers] = React.useState<number[]>([])
-    const [randomPokemonIndex, setRandomPokemonIndex] = React.useState(0);
     const [score, setScore] = React.useState(0);
+    const [round, setRound] = React.useState(1);
     const [optionSelection, setOptionSelection] = React.useState<{name: string, index: number}>();
     const [submit, setSubmitted] = React.useState(false);
     const [nextGame, setNextGame] = React.useState(false);
 
+    const history = useHistory();
+    
+    const { data, isLoading, error } = useGetPokemon(nextGame);
+    const mysteryPokemon = data.find(pokemon => pokemon.isMysteryPokemon === true) || data.at(0);
+
+    console.log(mysteryPokemon)
+    const pokemonFound = optionSelection?.name === mysteryPokemon?.name;
     
     const displaySilhouette = !submit ? cx("img", "silhouette") : cx("img", "show");
     
-    const { data, isLoading, error } = useGetPokemon();
-    const pokemonFound = optionSelection?.name === data[randomPokemonIndex]?.name;
-
-
-    React.useEffect(() => {
-        let newSelectedNumbers = [...selectedNumbers]; // Start with the current array
-        for (let index = 0; newSelectedNumbers.length < 4; index++) {
-            const randomNumber = getRandomNumber();
-            if (!newSelectedNumbers.includes(randomNumber)) {
-                newSelectedNumbers.push(randomNumber);
-            }
-        }
-        setSelectedNumbers(newSelectedNumbers); // Update state after array is built
-        const randomIndex = newSelectedNumbers[Math.floor(Math.random() * newSelectedNumbers.length)];
-        setRandomPokemonIndex(randomIndex);
-        setNextGame(false);
-    }, [nextGame === true]);
-
     const onClickCheckResult = () => {
         if (data && pokemonFound) {
             setScore(score + 1);
@@ -52,15 +41,13 @@ const Game = () => {
         setSubmitted(!submit);
         setHasSelectedResponse(!hasSelectedResponse);
         setNextGame(!nextGame);
-        setRandomPokemonIndex(0);
-        setSelectedNumbers([]);     
+        setRound(round + 1);
 
+        //react hook here
     }
 
-
-
-const getStyleArray = (index:number, value:number) => {
-    const getElement = value == randomPokemonIndex;
+const getStyleArray = (index:number, value:string) => {
+    const getElement = value == mysteryPokemon?.name
     const userSelectionIndex = optionSelection?.index === index;
     let styleArray = ["option"];
     if (!submit && userSelectionIndex){
@@ -76,40 +63,42 @@ const getStyleArray = (index:number, value:number) => {
 
     return cx(styleArray); 
 }
+
+const displayMysteryPokemon = <Card.Img className={displaySilhouette} src={mysteryPokemon?.image} />
+const displayLoading = (
+    <div className="spinner_container">
+        <Spinner className="spinner" animation="border"/>
+    </div>
+);
 const displayOptions = () => (
     (<div>
-        {data && selectedNumbers.map((value,index) =>
+        {data && data.map((value,index) =>
             <Card.Title
-                key={data[value].id}
-                className={getStyleArray(index, value)}
+                key={value.id}
+                className={getStyleArray(index, value.name)}
                 onClick={() => {
-                    setOptionSelection({name: data[value].name, index});
+                    setOptionSelection({name: value.name, index});
                     setHasSelectedResponse(!hasSelectedResponse);
                 }}
             >
-            {capitalizeFirstLetter(data[value].name)}
+            {capitalizeFirstLetter(value.name)}
             </Card.Title>
         )}
     </div>)
 )
 
-    if (isLoading) return(
-    <div className="spinner_container">
-        <Spinner className="spinner" animation="border"/>
-        </div>);
     if (error) return <div>Error: {error}</div>;
 
     return (
         <div className="container">
-            {data && data.length > 0 && score < 10 &&
+            {data && data.length > 0 && round < 10 &&
                 <>
                     <div>
                         <h4 className="score">Score: {score}/10</h4>
                     </div>
                     <Card className="game">
                         <Card.Title className="title">Who's That Pokemon?</Card.Title>
-                        <Card.Img className={displaySilhouette} src={data[randomPokemonIndex].image} />
-                      
+                        {isLoading ? displayLoading : displayMysteryPokemon}
                             {<div className="questions">
                                 {displayOptions()}
                             </div>}
@@ -118,8 +107,10 @@ const displayOptions = () => (
                     </Card>
                 </>
             }
-            {score == 10 && <Card>
+            {round ==  10 && <Card className="container">
                 <Card.Text>Your Score was {score}/10</Card.Text>
+                <Button onClick={() => history.push('/')} >Back to Home</Button>
+                <Button onClick={() => window.location.reload()} >Try Again</Button>
             </Card>}
         </div>
     )

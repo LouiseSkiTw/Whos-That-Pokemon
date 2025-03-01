@@ -9,38 +9,38 @@
     justify-self: center;
     align-self: center;
     font-family: $font-family-fantasy;
-    background-color: red;
 }
 
 .spinner_container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    border: 1px solid black;
 
     .spinner {
-        width: $max-width/4;
-        height: $max-width/4;
+        width: 150px;
+        height: 150px;
     }
 }
 
 .score {
     font-size: medium;
     font-weight: 400;
+    display: flex;
+    justify-self: center;
+    align-self: center;  
 }
 
 .img {
     display: flex;
-    width: 250px;
-    height: 200px;
+    width: $img_width;
+    height: $img_height;
     justify-self: center;
     align-self: center;  
 }
 
 .silhouette {
-    width: 250px;
-    height: 200px;
+    width: $img_width;
+    height: $img_height;
     filter: brightness(0);
 }   
 
@@ -50,7 +50,7 @@
 }
 
 .game {
-    width: 1000px;
+    width: 1004px;
     display: flex;
     justify-self: center;
     align-self: center;  
@@ -76,8 +76,9 @@
 }
 
 .selected {
-    background-color: $pokemon_blue;
-    color: $pokemon_yellow;
+    background-color: $pokemon_yellow;
+    color: black;
+    box-shadow: 3px 3px 3px #d9c702;
 }
 
 .option:nth-child(even):hover,
