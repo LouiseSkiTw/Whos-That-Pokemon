@@ -1,0 +1,27 @@
+@import '../assets/variables.scss';
+
+.buttons {
+    color: $pokemon_yellow;
+}
+
+.btn_container {
+    display: flex; /* Flexbox container */
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    height: 100%; /* Ensure the container has a height for vertical centering */
+  }
+  
+  .col-md-2 {
+    display: flex; /* Make each column a flexbox container */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+  }
+
+.text {
+    text-align: center;
+    color: $pokemon_yellow;
+    font-family: $font-family-fantasy;
+    font-size: xx-large;
+    padding-bottom: 10px;
+
+}

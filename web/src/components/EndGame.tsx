@@ -1,7 +1,7 @@
 import { Container, Row, Card, Button } from "react-bootstrap";
-import Column from "./Column";
-import Columns from "./Columns";
 import { useHistory } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import './EndPage.scss';
 
 interface EndGamePassedProps {
     score:number;
@@ -12,17 +12,17 @@ const EndGame = ({score}: EndGamePassedProps) => {
     return(
     <Container>
     <Row>
-        <Card.Text>Your Score was {score}/10</Card.Text>
+        <Card.Text className="text">Your Score was {score}/10</Card.Text>
     </Row>
     <Row>
-        <Columns>
-            <Column>
-                <Button onClick={() => window.location.reload()} >Try Again</Button>
-            </Column>
-            <Column>
-                <Button onClick={() => history.push('/')} >Back to Home</Button>
-            </Column>
-        </Columns>
+        <div className="row btn_container">
+            <div className="col-md-2">
+                <Button className="buttons" onClick={() => window.location.reload()}>Try Again</Button>
+            </div>
+            <div className="col-md-2">
+                <Button className="buttons" onClick={() => history.push('/')}>Back to Home</Button>
+            </div>
+        </div>
     </Row>
 </Container>
 
