@@ -1,9 +1,8 @@
 @import '../../assets/_variables.scss';
 
 .container {
-  @include container();
+  @include app_container();
   margin-left: 10px;
-  background-color: black;
 
   .image {
     display: inline;
