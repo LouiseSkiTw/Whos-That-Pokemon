@@ -1,8 +1,10 @@
-import { Button, Card, Container, Row } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import './StartPage.scss'
-import "bootstrap/dist/css/bootstrap.min.css"
+// import "bootstrap/dist/css/bootstrap.min.css"
 import img from '../../assets/whos_that.png'
+import Columns from "../../components/Columns";
+import Column from "../../components/Column";
 
 
 const StartPage = () => {
@@ -11,14 +13,14 @@ const StartPage = () => {
         history.push('/game');
     }
     return (
-        <Container className="container">
-            <Row className="row">
-                <Card>
-                    <Card.Img className="col col-6 image" src={img} />
-                    <Button className="col col-3 start_button" onClick={onClickHandler}>Game Start</Button>
-                </Card>
-            </Row>
-        </Container>
+        <Columns>
+            <Column>
+                <Card.Img className="image" src={img} alt="Whos that Pokemon" />
+            </Column>
+            <Column>
+                <Button className="col start_button" onClick={onClickHandler}>Play</Button>
+            </Column>
+        </Columns>
 
     )
 }
