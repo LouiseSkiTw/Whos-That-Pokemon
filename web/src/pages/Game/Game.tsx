@@ -11,14 +11,12 @@ import EndGame from "../../components/EndGame";
 
 
 // Fix Spinner
-// Add colours for pass and fail
-// Loop for 10, display result
 
 const Game = () => {
     const [hasSelectedResponse, setHasSelectedResponse] = React.useState(false);
     const [score, setScore] = React.useState(0);
     const [round, setRound] = React.useState(1);
-    const [optionSelection, setOptionSelection] = React.useState<{ name: string, index: number }>();
+    const [optionSelection, setOptionSelection] = React.useState<{ name: string, index: number }|undefined>();
     const [submit, setSubmitted] = React.useState(false);
     const [nextGame, setNextGame] = React.useState(false);
 
@@ -39,17 +37,22 @@ const Game = () => {
         setHasSelectedResponse(!hasSelectedResponse);
         setNextGame(!nextGame);
         setRound(round + 1);
+        setOptionSelection(undefined);
     };
 
     const getStyleArray = (index: number, value: string) => {
         const getElement = value == mysteryPokemon?.name;
+        console.log(optionSelection)
         const userSelectionIndex = optionSelection?.index === index;
-        let styleArray = ["option", "buttons"];
+        let styleArray = ["option"];
         if (!submit && userSelectionIndex) {
             styleArray.push("selected");
-        } else if (submit && getElement) {
+        }
+        if (submit && getElement) {
             styleArray.push("success")
-        } else if (submit && !pokemonFound && userSelectionIndex) {
+        }
+        console.log(value,"-", submit, !pokemonFound, userSelectionIndex)
+        if (submit && !pokemonFound && userSelectionIndex) {
             styleArray.push("fail")
         }
         return cx(styleArray);
@@ -61,7 +64,8 @@ const Game = () => {
         <div className="img">
             <Card.Img className={displaySilhouette} src={mysteryPokemon?.image} />
         </div>
-    )
+    );
+
     const displayLoading = (
         <div className="spinner_container">
             <Spinner className="spinner" animation="border" />
@@ -81,8 +85,8 @@ const Game = () => {
                     {capitalizeFirstLetter(value.name)}
                 </Card.Title>
             )}
-                {!submit && <Button className="button_submit buttons" disabled={!hasSelectedResponse} onClick={() => onClickCheckResult()}>Submit</Button>}
-                {submit && <Button className="button_submit buttons" onClick={() => onClickNextGame()}>Next</Button>}
+            {!submit && <Button className="button_submit" disabled={!hasSelectedResponse} onClick={() => onClickCheckResult()}>Submit</Button>}
+            {submit && <Button className="button_submit" onClick={() => onClickNextGame()}>Next</Button>}
         </div>
     )
 
@@ -93,12 +97,11 @@ const Game = () => {
             {round < 10 &&
                 <>
                     <Card className="game">
-                        <Row>
-                            <div className="header">
-                                <h4 className="score">Score: {score}/10</h4>
-                                <Card.Title className="title">Who's That Pokemon?</Card.Title>
-                            </div>
-                        </Row>
+                        <div className="header">
+                            <h4 className="score">Score: {score}/10</h4>
+                            <Card.Text className="title">Who's That Pokemon?</Card.Text>
+                        </div>
+                        <div className="game_play">
                         <Row>
                             <Columns>
                                 <Column>
@@ -109,6 +112,7 @@ const Game = () => {
                                 </Column>
                             </Columns>
                         </Row>
+                        </div>
                     </Card>
                 </>
             }

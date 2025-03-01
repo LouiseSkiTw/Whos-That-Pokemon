@@ -8,16 +8,17 @@
     background-color: white;
     border: 2px solid $pokemon_yellow;
     max-height: 400px;
+}
 
-    .spinner_container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+.spinner_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 400px;
 
-        .spinner {
-            width: 150px;
-            height: 150px;
-        }
+    .spinner {
+        width: 200px;
+        height: 200px;
     }
 }
 
@@ -27,23 +28,31 @@
 }
 
 .header {
-    background-color: $pokemon_yellow;
-    display: inline-block;
+    display: flex;
+    justify-content: center; 
     align-items: center;
+    position: relative;
+    padding: 10px;
+    background-color: $pokemon_yellow;
+}
 
 
-    .score {
-        display: inline;
-        font-size: medium;
-        font-weight: 400;
-        text-align: left;
-        margin-right: 40px;
-    }
+.score {
+    display: inline;
+    font-size: medium;
+    font-weight: 400;
+    text-align: left;
+    margin-right: 40px;
 
-    .title {
-        display: inline;
-        font-family: $font-family-fantasy;
-    }
+    position: absolute;
+    left: 10px; /* Push the score to the left */
+    margin: 0;
+}
+
+.title {
+    display: inline;
+    font-family: $font-family-fantasy;
+    font-size: 36px;
 }
 
 .silhouette {
@@ -64,16 +73,7 @@
     display: flex;
     justify-self: center;
     align-self: center;
-    max-height: 500px;
     background-color: black;
-}
-
-.buttons {
-    background-color: $pokemon_blue;
-    color: $pokemon_yellow;
-    border-radius: 12px;
-    text-align: center;
-    border: 2px solid $pokemon_yellow;
 }
 
 .button_submit {
@@ -81,18 +81,29 @@
     margin-top: 8px;
     padding: 16px 0;
     color: $pokemon_yellow;
+    background-color: $pokemon_blue;
+    border-radius: 12px;
+    text-align: center;
+    border: 2px solid $pokemon_yellow;
 }
 
 .option {
     display: block;
     padding: 25px 0;
+    background-color: $pokemon_blue;
+    color: $pokemon_yellow;
+    border-radius: 12px;
+    text-align: center;
+    border: 2px solid $pokemon_yellow;
 
     &.fail {
         background-color: $fail;
+        color: white;
     }
 
     &.success {
         background-color: $success;
+        color: white;
     }
 }
 .option:hover {
