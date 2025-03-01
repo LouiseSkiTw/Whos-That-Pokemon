@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -18,18 +19,27 @@ public class PokemonService {
     private GetPokemonClient getPokemonClient;
 
     public ArrayList<Pokemon> getPokemon() {
+        ArrayList<Integer> getRandomPokeIndex = getRandomNumber();
         ArrayList<Pokemon> pokeArray = new ArrayList<>();
-        List<CompletableFuture<Pokemon>> futures =
-                IntStream.rangeClosed(1, 50)
-                        .mapToObj(index -> CompletableFuture.supplyAsync(() -> getPokemonClient.getPokemon(index)))
-                        .collect(Collectors.toList());
+        Random random= new Random();
 
-        // Wait for all futures to complete and collect results
-        pokeArray.addAll(futures.stream()
-                .map(CompletableFuture::join) // Join to get the result of each future
-                .collect(Collectors.toList()));
-
+        for (int i = 0; i < 4; i++) {
+            pokeArray.add(getPokemonClient.getPokemon(getRandomPokeIndex.get(i)));
+        }
+        int randomMysterPokemon = random.nextInt(3);
+        pokeArray.get(randomMysterPokemon).setMysteryPokemon(true);
         return pokeArray;
     }
 
+    private ArrayList<Integer> getRandomNumber() {
+        ArrayList<Integer> pokeIndex = new ArrayList<>();
+        Random random =  new Random();
+        while(pokeIndex.size() < 4) {
+            int randomNumber = random.nextInt(1,100);
+            if(!pokeIndex.contains(randomNumber)){
+                pokeIndex.add(randomNumber);
+            }
+        }
+        return pokeIndex;
+    }
 }

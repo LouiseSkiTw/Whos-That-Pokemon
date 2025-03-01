@@ -35,7 +35,6 @@ public class GetPokemonClient {
 
     private Pokemon mapResponseToObject(JsonNode rootNode, String jsonResponse) {
         Pokemon pokemon = new Pokemon();
-        System.out.println("LOVE DIVE");
         pokemon.setId(rootNode.path("id").asLong());
         pokemon.setName(rootNode.path("name").asText());
         pokemon.setImage(rootNode.path("sprites").path("front_default").asText());
