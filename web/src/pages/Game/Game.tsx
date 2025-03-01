@@ -8,6 +8,7 @@ import { capitalizeFirstLetter } from "../../utils/utils";
 import Columns from "../../components/Columns";
 import Column from "../../components/Column";
 import EndGame from "../../components/EndGame";
+import { Pokemon } from "../../service/PokemonService.interface";
 
 
 // Fix Spinner
@@ -16,15 +17,20 @@ const Game = () => {
     const [hasSelectedResponse, setHasSelectedResponse] = React.useState(false);
     const [score, setScore] = React.useState(0);
     const [round, setRound] = React.useState(1);
-    const [optionSelection, setOptionSelection] = React.useState<{ name: string, index: number }|undefined>();
+    const [optionSelection, setOptionSelection] = React.useState<{ name: string, index: number } | undefined>();
     const [submit, setSubmitted] = React.useState(false);
     const [nextGame, setNextGame] = React.useState(false);
+    const [getMysteryPokemon, setMysteryPokemon] = React.useState<Pokemon>();
+
 
     const { data, isLoading, error } = useGetPokemon(nextGame);
+    const pokemonFound = optionSelection?.name === getMysteryPokemon?.name;
 
-    const mysteryPokemon = data.find(pokemon => pokemon.isMysteryPokemon === true) || data.at(0);
-    const pokemonFound = optionSelection?.name === mysteryPokemon?.name;
-
+    React.useEffect(() => {
+        if (data) {
+            setMysteryPokemon(data.find(pokemon => pokemon.mysteryPokemon === true));
+        }
+    }, [data]);
     const onClickCheckResult = () => {
         if (data && pokemonFound) {
             setScore(score + 1);
@@ -41,7 +47,7 @@ const Game = () => {
     };
 
     const getStyleArray = (index: number, value: string) => {
-        const getElement = value == mysteryPokemon?.name;
+        const getElement = value == getMysteryPokemon?.name;
         const userSelectionIndex = optionSelection?.index === index;
         let styleArray = ["option"];
         if (!submit && userSelectionIndex) {
@@ -60,7 +66,7 @@ const Game = () => {
 
     const displayMysteryPokemon = (
         <div className="img">
-            <Card.Img className={displaySilhouette} src={mysteryPokemon?.image} alt={mysteryPokemon?.name}/>
+            <Card.Img className={displaySilhouette} src={getMysteryPokemon?.image} alt={getMysteryPokemon?.name} />
         </div>
     );
 
@@ -100,16 +106,16 @@ const Game = () => {
                             <Card.Text className="title">Who's That Pokemon?</Card.Text>
                         </div>
                         <div className="game_play">
-                        <Row>
-                            <Columns>
-                                <Column>
-                                    {isLoading ? displayLoading : displayMysteryPokemon}
-                                </Column>
-                                <Column>
-                                    {displayOptions}
-                                </Column>
-                            </Columns>
-                        </Row>
+                            <Row>
+                                <Columns>
+                                    <Column>
+                                        {isLoading ? displayLoading : displayMysteryPokemon}
+                                    </Column>
+                                    <Column>
+                                        {displayOptions}
+                                    </Column>
+                                </Columns>
+                            </Row>
                         </div>
                     </Card>
                 </>
