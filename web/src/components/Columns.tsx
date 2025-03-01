@@ -1,4 +1,4 @@
-import { Container, Row, Card, Button } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 
 interface ColumnsPassedProps{
     children: any;
