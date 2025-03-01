@@ -42,7 +42,6 @@ const Game = () => {
 
     const getStyleArray = (index: number, value: string) => {
         const getElement = value == mysteryPokemon?.name;
-        console.log(optionSelection)
         const userSelectionIndex = optionSelection?.index === index;
         let styleArray = ["option"];
         if (!submit && userSelectionIndex) {
@@ -51,7 +50,6 @@ const Game = () => {
         if (submit && getElement) {
             styleArray.push("success")
         }
-        console.log(value,"-", submit, !pokemonFound, userSelectionIndex)
         if (submit && !pokemonFound && userSelectionIndex) {
             styleArray.push("fail")
         }
@@ -62,12 +60,12 @@ const Game = () => {
 
     const displayMysteryPokemon = (
         <div className="img">
-            <Card.Img className={displaySilhouette} src={mysteryPokemon?.image} />
+            <Card.Img className={displaySilhouette} src={mysteryPokemon?.image} alt={mysteryPokemon?.name}/>
         </div>
     );
 
     const displayLoading = (
-        <div className="spinner_container">
+        <div className="spinner_container" role="status">
             <Spinner className="spinner" animation="border" />
         </div>
     );
