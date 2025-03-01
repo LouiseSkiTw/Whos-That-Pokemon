@@ -1,13 +1,18 @@
 {
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
-    "target": "ES2022",
+    "target": "ESNext",
     "lib": ["ES2023"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "jsx": "react-jsx",
 
+    "esModuleInterop": true,
+
+  
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "node", // Resolves modules like React
+
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
@@ -20,5 +25,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["vite.config.ts"]
+  "include": ["vite.config.ts", "src"],
+  "exclude": ["node_modules"] // (Optional) Excludes unnecessary files
 }
+
