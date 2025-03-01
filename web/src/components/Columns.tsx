@@ -5,8 +5,8 @@ interface ColumnsPassedProps{
 }
 const Columns = ({children} : ColumnsPassedProps) => (
     <div>
-        <Container className="container">
-            <Row className="row">
+        <Container>
+            <Row>
                 {children}
             </Row>
         </Container>

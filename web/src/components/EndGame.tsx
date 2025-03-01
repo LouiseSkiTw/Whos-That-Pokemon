@@ -11,10 +11,10 @@ const EndGame = ({score}: EndGamePassedProps) => {
     const history = useHistory(); 
     return(
     <Container>
-    <Row className="row">
+    <Row>
         <Card.Text>Your Score was {score}/10</Card.Text>
     </Row>
-    <Row className="row">
+    <Row>
         <Columns>
             <Column>
                 <Button onClick={() => window.location.reload()} >Try Again</Button>

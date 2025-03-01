@@ -19,10 +19,9 @@ $font-family-fantasy: fantasy;
     transition: border-color 0.25s;
 }
 
-@mixin container{
+@mixin app_container{
     max-width: $max-width;
     padding: 2rem;
     color-scheme: light dark;
-    color: $pokemon_yellow; 
-    background-color: $pokemon_blue;
+    background-color: black;
 }

@@ -1,48 +1,56 @@
 @import '../../assets/_variables.scss';
 
 .container {
-    @include container();
-}
-
-.title {
-    display: flex;
-    justify-self: center;
-    align-self: center;
-    font-family: $font-family-fantasy;
-}
-
-.spinner_container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .spinner {
-        width: 150px;
-        height: 150px;
-    }
-}
-
-.score {
-    font-size: medium;
-    font-weight: 400;
-    display: flex;
-    justify-self: center;
-    align-self: center;  
+    @include app_container();
 }
 
 .img {
-    display: flex;
-    width: $img_width;
-    height: $img_height;
-    justify-self: center;
-    align-self: center;  
+    background-color: white;
+    border: 2px solid $pokemon_yellow;
+    max-height: 400px;
+
+    .spinner_container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .spinner {
+            width: 150px;
+            height: 150px;
+        }
+    }
+}
+
+.options {
+    height: 400px;
+    padding: 10px 0;
+}
+
+.header {
+    background-color: $pokemon_yellow;
+    display: inline-block;
+    align-items: center;
+
+
+    .score {
+        display: inline;
+        font-size: medium;
+        font-weight: 400;
+        text-align: left;
+        margin-right: 40px;
+    }
+
+    .title {
+        display: inline;
+        font-family: $font-family-fantasy;
+    }
 }
 
 .silhouette {
-    width: $img_width;
-    height: $img_height;
+    width: 400px;
+    height: 400px;
     filter: brightness(0);
-}   
+}
 
 .show {
     filter: brightness(100%);
@@ -50,21 +58,34 @@
 }
 
 .game {
-    width: 1004px;
+    max-width: 960px;
+    width: 960px;
+    height: 900px;
     display: flex;
     justify-self: center;
-    align-self: center;  
-    max-height: 600px;
+    align-self: center;
+    max-height: 500px;
+    background-color: black;
+}
+
+.buttons {
+    background-color: $pokemon_blue;
+    color: $pokemon_yellow;
+    border-radius: 12px;
+    text-align: center;
+    border: 2px solid $pokemon_yellow;
+}
+
+.button_submit {
+    width: 500px;
+    margin-top: 8px;
+    padding: 16px 0;
+    color: $pokemon_yellow;
 }
 
 .option {
     display: block;
-    padding: 8px 0;
-    color: black;
-    border-radius: 12px;
-    text-align: center;
-    background-color: $pokemon_blue;
-    color: $pokemon_yellow;
+    padding: 25px 0;
 
     &.fail {
         background-color: $fail;
@@ -74,21 +95,13 @@
         background-color: $success;
     }
 }
+.option:hover {
+    background-color: black;
+    color: white;
+}
 
 .selected {
     background-color: $pokemon_yellow;
     color: black;
     box-shadow: 3px 3px 3px #d9c702;
-}
-
-.option:nth-child(even):hover,
-.option:nth-child(odd):hover {
-    background-color: black;
-    color: white;
-}
-
-.button {
-    @include button-styles();
-    width: 1000px;
-    border-radius: 12px;
 }
