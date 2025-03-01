@@ -3,7 +3,7 @@ import { getPokemon } from '../service/PokemonService';
 import { Pokemon } from '../service/PokemonService.interface';
 
 
-const useGetPokemon = () => {
+const useGetPokemon = (nextGame: boolean) => {
   const [data, setData] = useState<Pokemon[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>(undefined);
@@ -24,7 +24,7 @@ const useGetPokemon = () => {
     };
 
     fetchData();
-  }, []);
+  }, [nextGame]);
 
   return { data, isLoading, error };
 };
