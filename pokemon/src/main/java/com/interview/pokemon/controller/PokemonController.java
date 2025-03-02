@@ -20,11 +20,10 @@ public class PokemonController {
     private PokemonService pokemonService;
 
     @GetMapping("/getAll")
-    public ArrayList<Pokemon> WhoIsThatPokemon() {
+    public ArrayList<Pokemon> whoIsThatPokemon() {
         ArrayList<Pokemon> pokemon = pokemonService.getPokemon();
         if(pokemon.isEmpty()) {ResponseEntity.badRequest();
         }
-
         return ResponseEntity.ok(pokemon).getBody();
     }
 

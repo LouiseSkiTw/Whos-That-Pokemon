@@ -6,11 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
-import java.util.concurrent.CompletableFuture;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Service
 public class PokemonService {
@@ -22,24 +18,29 @@ public class PokemonService {
         ArrayList<Integer> getRandomPokeIndex = getRandomNumber();
         ArrayList<Pokemon> pokeArray = new ArrayList<>();
         Random random= new Random();
-
-        for (int i = 0; i < 4; i++) {
-            pokeArray.add(getPokemonClient.getPokemon(getRandomPokeIndex.get(i)));
+        int index = 0;
+        while(index < 4) {
+            Pokemon pokemon = getPokemonClient.getPokemon(getRandomPokeIndex.get(index));
+            pokeArray.add(pokemon);
+            index++;
         }
-        int randomMysterPokemon = random.nextInt(3);
-        pokeArray.get(randomMysterPokemon).setMysteryPokemon(true);
+        int randomMysteryPokemon = random.nextInt(4);
+        if(!pokeArray.isEmpty()) {
+            pokeArray.get(randomMysteryPokemon).setMysteryPokemon(true);
+        }
         return pokeArray;
     }
 
-    private ArrayList<Integer> getRandomNumber() {
+    protected ArrayList<Integer> getRandomNumber() {
         ArrayList<Integer> pokeIndex = new ArrayList<>();
-        Random random =  new Random();
-        while(pokeIndex.size() < 4) {
-            int randomNumber = random.nextInt(1,100);
-            if(!pokeIndex.contains(randomNumber)){
+        Random random = new Random();
+        while (pokeIndex.size() < 4) {
+            int randomNumber = random.nextInt(1,50);
+            if (!pokeIndex.contains(randomNumber)) {
                 pokeIndex.add(randomNumber);
             }
         }
         return pokeIndex;
     }
+
 }
