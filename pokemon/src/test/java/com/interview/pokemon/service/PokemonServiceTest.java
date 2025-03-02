@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -17,7 +18,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-class PokemonServiceTest {
+public class PokemonServiceTest {
 
     @Mock
     private GetPokemonClient getPokemonClient;
@@ -44,28 +45,49 @@ class PokemonServiceTest {
 
     @Test
     void testMysteryPokemonIsMarkedTrue() {
-        List<Pokemon> mockData = new ArrayList<>();
-        mockData.add(new Pokemon(1L, "pikachu", "pikachu.png", false));
-        mockData.add(new Pokemon(2L, "bulbasaur", "bulbasaur.png", false));
-        mockData.add(new Pokemon(3L, "charmander", "charmander.png", false));
-        mockData.add(new Pokemon(4L, "Onix", "onix.png", false));
+            // Spy on the service
+            PokemonService spyService = Mockito.spy(pokemonService);
 
-        when(getPokemonClient.getPokemon(anyInt()))
-                .thenAnswer(invocation -> {
-                    int index = invocation.getArgument(0);
-                    if (index >= 0 && index < mockData.size()) {
-                        return mockData.get(index);
-                    }
-                    return null;
-                });
+            // Mock the getRandomNumber() method to return controlled indices (to match mock data)
+            doReturn(new ArrayList<>(List.of(0, 1, 2, 3))).when(spyService).getRandomNumber();
 
-        ArrayList<Pokemon> result = pokemonService.getPokemon();
+            // Mock data
+            List<Pokemon> mockData = new ArrayList<>();
+            mockData.add(new Pokemon(1L, "pikachu", "pikachu.png", false));
+            mockData.add(new Pokemon(2L, "bulbasaur", "bulbasaur.png", false));
+            mockData.add(new Pokemon(3L, "charmander", "charmander.png", false));
+            mockData.add(new Pokemon(4L, "Onix", "onix.png", false));
 
-        List<Long> randomNumbers = result.stream().map(Pokemon::getId).toList();
+            // Mock getPokemonClient to return the correct Pokémon for each index
+            when(getPokemonClient.getPokemon(anyInt()))
+                    .thenAnswer(invocation -> {
+                        int index = invocation.getArgument(0);
+                        if (index >= 0 && index < mockData.size()) {
+                            return mockData.get(index);
+                        }
+                        return null; // Return null for invalid indices
+                    });
 
-        assertEquals(randomNumbers.size(), 4);
-        assertEquals(1, randomNumbers.stream().distinct().count());
+            // Call the method under test
+            ArrayList<Pokemon> result = spyService.getPokemon();
 
+            // Extract IDs for validation
+            List<Long> randomNumbers = result.stream().map(Pokemon::getId).toList();
+            System.out.println("Random Numbers: " + randomNumbers);
+
+            // Validate the results
+            assertEquals(4, result.size());
+            assertEquals(4, randomNumbers.stream().distinct().count()); // Verify all IDs are distinct
+
+            // Verify that one Pokémon is set as the mystery Pokémon
+            long mysteryCount = result.stream().filter(Pokemon::isMysteryPokemon).count();
+            assertEquals(1, mysteryCount);
+
+            // Verify that getPokemonClient.getPokemon() was called 4 times
+            verify(getPokemonClient, times(4)).getPokemon(anyInt());
+
+            // Verify that getRandomNumber() was called exactly once
+            verify(spyService, times(1)).getRandomNumber();
     }
 
     @Test
@@ -82,22 +104,31 @@ class PokemonServiceTest {
 
     @Test
     void testGetPokemonClientCalledFourTimesAndValidPokemonReturned() {
+        // Spy on the service
+        PokemonService spyService = Mockito.spy(pokemonService);
+
+        // Mock the getRandomNumber() method to return controlled indices (to match mock data)
+        doReturn(new ArrayList<>(List.of(0, 1, 2, 3))).when(spyService).getRandomNumber();
+
+        // Mock data
         List<Pokemon> mockData = new ArrayList<>();
         mockData.add(new Pokemon(1L, "pikachu", "pikachu.png", false));
         mockData.add(new Pokemon(2L, "bulbasaur", "bulbasaur.png", false));
         mockData.add(new Pokemon(3L, "charmander", "charmander.png", false));
         mockData.add(new Pokemon(4L, "Onix", "onix.png", false));
 
+        // Mock getPokemonClient to return the correct Pokémon for each index
         when(getPokemonClient.getPokemon(anyInt()))
                 .thenAnswer(invocation -> {
                     int index = invocation.getArgument(0);
                     if (index >= 0 && index < mockData.size()) {
                         return mockData.get(index);
                     }
-                    return null;
+                    return null; // Return null for invalid indices
                 });
 
-        ArrayList<Pokemon> result = pokemonService.getPokemon();
+        // Call the method under test
+        ArrayList<Pokemon> result = spyService.getPokemon();
 
         verify(getPokemonClient, times(4)).getPokemon(anyInt());
 

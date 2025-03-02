@@ -16,9 +16,9 @@ describe("Game Component", () => {
 
     beforeEach(() => {
         mockData = [
-            { id: 1, name: "pikachu", isMysteryPokemon: true, image: "pikachu.png" },
-            { id: 2, name: "bulbasaur", isMysteryPokemon: false, image: "bulbasaur.png" },
-            { id: 3, name: "charmander", isMysteryPokemon: false, image: "charmander.png" },
+            { id: 1, name: "pikachu", mysteryPokemon: true, image: "pikachu.png" },
+            { id: 2, name: "bulbasaur", mysteryPokemon: false, image: "bulbasaur.png" },
+            { id: 3, name: "charmander", mysteryPokemon: false, image: "charmander.png" },
         ];
 
         mockedUseGetPokemon.mockReturnValue({
