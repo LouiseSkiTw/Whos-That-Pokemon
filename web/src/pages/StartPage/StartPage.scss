@@ -17,7 +17,6 @@
 
   .start_button {
     @include button-styles();
-    width: 500px;
     display: inline;
     margin-top: 20px;
     border-radius: 8px;

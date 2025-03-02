@@ -76,7 +76,7 @@
     background-color: black;
 }
 
-.button_submit {
+.game .button_submit {
     width: 500px;
     margin-top: 8px;
     padding: 16px 0;
@@ -87,7 +87,13 @@
     border: 2px solid $pokemon_yellow;
 }
 
-.option {
+.game .button_submit:hover {
+    background-color: black;
+    color: white;
+}
+
+
+.game .option {
     display: block;
     padding: 25px 0;
     background-color: $pokemon_blue;

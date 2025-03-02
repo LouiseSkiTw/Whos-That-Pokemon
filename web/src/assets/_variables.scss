@@ -10,7 +10,6 @@ $font-family-fantasy: fantasy;
 
 @mixin button-styles($width: 500px, $box-shadow-color: $pokemon_blue, $bg-color: #1a1a1a) {
     width: $width;
-    box-shadow: 5px 10px 8px $box-shadow-color;
     font-size: 1em;
     font-weight: 500;
     font-family: inherit;
