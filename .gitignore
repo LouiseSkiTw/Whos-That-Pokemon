@@ -1,3 +1,5 @@
 web/eslint.config.js
 web/package-lock.json
 .idea/gradle.xml
+.idea/misc.xml
+.idea/gradle.xml
