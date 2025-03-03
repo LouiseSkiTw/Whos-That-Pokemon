@@ -1,7 +1,7 @@
 import { Container, Row, Card, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import './EndPage.scss';
+import './Base.scss';
 
 interface EndGamePassedProps {
     score:number;

@@ -9,6 +9,7 @@ import Columns from "../../components/Columns";
 import Column from "../../components/Column";
 import EndGame from "../../components/EndGame";
 import { Pokemon } from "../../service/PokemonService.interface";
+import ErrorPage from "../../components/ErrorPage";
 
 
 // Fix Spinner
@@ -102,7 +103,7 @@ const Game = () => {
         </div>
     )
 
-    if (error) return <div>Error: {error}</div>;
+    if (error) return <ErrorPage error={error}/>;
 
     return (
         <div className="game_container">

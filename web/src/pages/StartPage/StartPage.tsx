@@ -5,6 +5,8 @@ import './StartPage.scss'
 import img from '../../assets/whos_that.png'
 import Columns from "../../components/Columns";
 import Column from "../../components/Column";
+import pikachu from '../../assets/Pokemon.png'
+
 
 
 const StartPage = () => {
@@ -19,7 +21,9 @@ const StartPage = () => {
             </Column>
             <Column>
                 <Button className="col start_button" onClick={onClickHandler}>Play</Button>
+                <Card.Img className="icon" src={pikachu} />
             </Column>
+
         </Columns>
 
     )
