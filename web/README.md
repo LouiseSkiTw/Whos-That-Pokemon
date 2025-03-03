@@ -1,50 +1,36 @@
-# React + TypeScript + Vite
+# About
+- This repo covers the frontend side of the 'Who's that Pokemon Game'
+- The game starts with the loading page where a button will start the game.
+- When button is clicked the API is launched fetching the 4 options.
+- The user selects one of the 4 options and the submit button will appear
+- If the user does not select an option or if deselects current option the submit button will not appear
+- Once the user selects an option and pressed 'Submit' then the Pokemon is uncovered and the correct option is given and the button for the next options is avaliable
+- If the user guesses wrong, it will highlight the correct answer (green) and the wrong answer(red)
+- Game will end when the number of rounds is 10
+- Once 10 rounds are completed, the user will be given their score with an option to go back to home page or play again
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+# Getting Started
+- To begin ensure that all dependencies are deployed
+- To do so ensure that you are in the web folder then run `npm i`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# How To run
+- Run the command `cd web` (only if on root package) then `npm run dev`
+- Follow the link that is provided
+- Default host is http://localhost:5173/
 
-## Expanding the ESLint configuration
+# API
+- There is only one API for this game which is the 'getPokemon'. 
+- It passes no arguments and returns an array of 4 options with 4 attributes in the response:
+  - id - Id of the pokemon for reference
+  - name - The name of the pokemon which will be selected as the options
+  - Image - The image of the pokemon. Which will be displayed once the user submits their choice
+  - mysteryPokemon: this is a boolean which determines which pokemon, the user is trying to guess.
+  
+- All are captured in the PokemonService.interface file
+- The API should respond with an error if there is no results
+- If no failure the API should return with the 4 options.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+# Running Tests
+- To run tests, not yet configured for individual packages
+- on /web run `npm test`

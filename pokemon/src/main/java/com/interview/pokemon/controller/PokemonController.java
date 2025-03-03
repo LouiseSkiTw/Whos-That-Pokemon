@@ -19,7 +19,7 @@ public class PokemonController {
     @Autowired
     private PokemonService pokemonService;
 
-    @GetMapping("/getAll")
+    @GetMapping("/getPokemon")
     public ArrayList<Pokemon> whoIsThatPokemon() {
         ArrayList<Pokemon> pokemon = pokemonService.getPokemon();
         if(pokemon.isEmpty()) {ResponseEntity.badRequest();
