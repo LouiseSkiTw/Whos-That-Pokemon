@@ -1,6 +1,16 @@
 # Getting Started
 - Before running, ensure that all dependencies are download by running gradle from the IDE
 
+# Project Struture
+- Controller
+  - Where the requests mapping happens
+- Service 
+  - Where the logic for the service is created
+- Model 
+  - Where the POJO's are stored
+- Client 
+  - Endpoints for the internal/external services
+
 
 # How To Run
 - To launch, navigate over to `pokemon/src/main/java/PokemonApplication`

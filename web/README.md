@@ -7,6 +7,27 @@
 - Follow the link that is provided
 - Default host is http://localhost:5173/s
 
+# Project Structure
+- assets
+  - Images
+  - Shared Styling
+- components
+  - Base Components
+    - Main File
+    - Styling Sheet
+- pages
+  - A combination of logic and components
+    - Main File
+    - Styling Sheet
+    - Tests
+- hooks
+  - Gateway between service and logic
+- service
+  - Interface
+  - Endpoint to external service
+- utils
+  - shared code
+
 # About
 - This repo covers the frontend side of the 'Who's that Pokemon Game'
 - The game starts with the loading page where a button will start the game.
