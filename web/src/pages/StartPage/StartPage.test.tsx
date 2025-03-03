@@ -5,7 +5,7 @@ import "@testing-library/jest-dom";
 describe("StartPage Component", () => {
     it("renders the image with correct alt text", () => {
         render(<StartPage />);
-        const image = screen.getByAltText("Whos that Pokemon");
+        const image = screen.getByAltText("Who's that Pokemon");
         expect(image).toBeInTheDocument();
     });
 });

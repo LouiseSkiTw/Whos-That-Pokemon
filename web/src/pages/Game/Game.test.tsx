@@ -47,7 +47,7 @@ describe("Game Component", () => {
         });
 
         render(<Game />);
-        expect(screen.getByText("Error: Failed to fetch data")).toBeInTheDocument();
+        expect(screen.getByText("Failed to fetch data")).toBeInTheDocument();
     });
 
     test("renders the mystery Pokémon and options", () => {
