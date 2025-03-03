@@ -17,7 +17,7 @@ const StartPage = () => {
     return (
         <Columns>
             <Column>
-                <Card.Img className="image" src={img} alt="Whos that Pokemon" />
+                <Card.Img className="image" src={img} alt="Who's that Pokemon" />
             </Column>
             <Column>
                 <Button className="col start_button" onClick={onClickHandler}>Play</Button>

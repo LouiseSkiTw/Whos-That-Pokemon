@@ -77,20 +77,11 @@
 }
 
 .game .button_submit {
-    font-size: larger;
-    font-weight: 500;
-    width: 500px;
-    margin-top: 10px;
-    padding: 16px 0;
-    color: $pokemon_yellow;
-    background-color: $pokemon_blue;
-    border-radius: 12px;
-    border: 2px solid $pokemon_yellow;
+  @include option_button()
 }
 
 .game .button_submit:hover {
-    background-color: black;
-    color: white;
+  @include hover_option();
 }
 
 

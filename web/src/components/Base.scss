@@ -1,7 +1,11 @@
 @import '../assets/variables.scss';
 
 .buttons {
-    color: $pokemon_yellow;
+  @include option_button();
+}
+
+ .buttons:hover {
+  @include hover_option();
 }
 
 .btn_container {

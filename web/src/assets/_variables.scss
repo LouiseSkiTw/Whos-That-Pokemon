@@ -24,3 +24,20 @@ $font-family-fantasy: fantasy;
     color-scheme: light dark;
     background-color: black;
 }
+
+@mixin option_button {
+    font-size: larger;
+    font-weight: 500;
+    width: 500px;
+    margin-top: 10px;
+    padding: 16px 0;
+    color: $pokemon_yellow;
+    background-color: $pokemon_blue;
+    border-radius: 12px;
+    border: 2px solid $pokemon_yellow;
+}
+
+@mixin hover_option {
+    background-color: black;
+    color: white;
+}
