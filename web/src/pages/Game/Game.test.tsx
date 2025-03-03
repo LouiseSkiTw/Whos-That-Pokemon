@@ -109,4 +109,35 @@ describe("Game Component", () => {
 
         expect(screen.getByText("Score: 1/10")).toBeInTheDocument();
     });
+
+    test("should display slected when user clicks selected then unselects when the user selects the same option", () => {
+        render(<Game />);
+
+        const option = screen.getByText(/pikachu/i);
+        fireEvent.click(option);
+
+        expect(option).toHaveClass("selected");
+        expect(screen.getByText(/Submit/i)).toBeDefined();
+
+        fireEvent.click(option);
+        expect(option).toHaveClass("option");
+        expect(screen.getByText(/Submit/i)).toBeDisabled();
+
+    })
+    test("should display selected when user clicks selected and when the user selcects a new option", () => {
+        render(<Game />);
+
+        const option = screen.getByText(/pikachu/i);
+        const option2 = screen.getByText(/charmander/i);
+        fireEvent.click(option);
+        expect(option).toHaveClass("selected");
+        
+        fireEvent.click(option2);
+        expect(option).toHaveClass("option");
+        expect(option2).toHaveClass("selected");
+
+        expect(screen.getByText(/Submit/i)).toBeDefined();
+
+
+    })
 });
