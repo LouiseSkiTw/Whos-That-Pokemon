@@ -94,6 +94,8 @@ describe("Game Component", () => {
         expect(screen.getByText("Score: 0/10")).toBeInTheDocument();
 
         expect(incorrectOption).toHaveClass("fail");
+
+        expect(screen.getByText(/pikachu/i)).toHaveClass("success")
     });
 
     test("moves to the next round when Next button is clicked", () => {
