@@ -25,7 +25,7 @@
   - id - Id of the pokemon for reference
   - name - The name of the pokemon which will be selected as the options
   - Image - The image of the pokemon. Which will be displayed once the user submits their choice
-  - mysteryPokemon: this is a boolean which determines which pokemon, the user is trying to guess.
+  - mysteryPokemon - this is a boolean which determines which pokemon, the user is trying to guess.
   
 - All are captured in the PokemonService.interface file
 - The API should respond with an error if there is no results
