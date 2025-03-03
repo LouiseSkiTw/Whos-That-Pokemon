@@ -1,3 +1,11 @@
+# Getting Started
+- Before running, ensure that all dependencies are download by running gradle from the IDE
+
+
+# How To Run
+- To launch, navigate over to `pokemon/src/main/java/PokemonApplication`
+- Click the green play button next to PokemonApplication
+
 # About
 - This covers the backend side of the 'Who's that Pokemon' Game
 - The service is reached a `getPokemon` this will return the Array of 4 pokemon, one which is the correct answer and 3 decoys
@@ -41,10 +49,6 @@
     }
 ]
 ```
-
-# Getting Started
-- Before running, ensure that all dependencies are download by running gradle from the IDE
-- To launch, navigate over to `pokemon/src/main/java/PokemonApplication` and click the green play button next to PokemonApplication
 
 # API
 - In this application, we use the [PokeAPI](https://pokeapi.co) and the [Pokemon](https://pokeapi.co/docs/v2#pokemon) endpoint to fetch the data.

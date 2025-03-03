@@ -1,3 +1,12 @@
+# Getting Started
+- To begin ensure that all dependencies are deployed
+- To do so ensure that you are in the web folder then run `npm i`
+
+# How To run
+- Run the command `cd web` (only if on root package) then `npm run dev`
+- Follow the link that is provided
+- Default host is http://localhost:5173/s
+
 # About
 - This repo covers the frontend side of the 'Who's that Pokemon Game'
 - The game starts with the loading page where a button will start the game.
@@ -8,16 +17,6 @@
 - If the user guesses wrong, it will highlight the correct answer (green) and the wrong answer(red)
 - Game will end when the number of rounds is 10
 - Once 10 rounds are completed, the user will be given their score with an option to go back to home page or play again
-
-
-# Getting Started
-- To begin ensure that all dependencies are deployed
-- To do so ensure that you are in the web folder then run `npm i`
-
-# How To run
-- Run the command `cd web` (only if on root package) then `npm run dev`
-- Follow the link that is provided
-- Default host is http://localhost:5173/
 
 # API
 - There is only one API for this game which is the 'getPokemon'. 
