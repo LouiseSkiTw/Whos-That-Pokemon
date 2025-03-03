@@ -50,15 +50,20 @@ const Game = () => {
         const getElement = value == getMysteryPokemon?.name;
         const userSelectionIndex = optionSelection?.index === index;
         let styleArray = ["option"];
+        if (index === optionSelection?.index && !hasSelectedResponse) {
+            return cx(["option"]);
+        }
         if (!submit && userSelectionIndex) {
             styleArray.push("selected");
         }
         if (submit && getElement) {
-            styleArray.push("success")
+            styleArray.push("success");
         }
         if (submit && !pokemonFound && userSelectionIndex) {
-            styleArray.push("fail")
+            styleArray.push("fail");
         }
+
+
         return cx(styleArray);
     };
 
@@ -83,7 +88,10 @@ const Game = () => {
                     className={getStyleArray(index, value.name)}
                     onClick={() => {
                         setOptionSelection({ name: value.name, index });
-                        setHasSelectedResponse(!hasSelectedResponse);
+                        setHasSelectedResponse(true);
+                        if(index == optionSelection?.index && hasSelectedResponse) {
+                            setHasSelectedResponse(false);
+                        }
                     }}
                 >
                     {capitalizeFirstLetter(value.name)}

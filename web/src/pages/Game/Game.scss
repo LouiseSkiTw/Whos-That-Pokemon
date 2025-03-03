@@ -77,13 +77,14 @@
 }
 
 .game .button_submit {
+    font-size: larger;
+    font-weight: 500;
     width: 500px;
-    margin-top: 8px;
+    margin-top: 10px;
     padding: 16px 0;
     color: $pokemon_yellow;
     background-color: $pokemon_blue;
     border-radius: 12px;
-    text-align: center;
     border: 2px solid $pokemon_yellow;
 }
 
@@ -95,7 +96,7 @@
 
 .game .option {
     display: block;
-    padding: 25px 0;
+    padding: 20px 0;
     background-color: $pokemon_blue;
     color: $pokemon_yellow;
     border-radius: 12px;
@@ -117,7 +118,7 @@
     color: white;
 }
 
-.selected {
+.game .option.selected {
     background-color: $pokemon_yellow;
     color: black;
     box-shadow: 3px 3px 3px #d9c702;
