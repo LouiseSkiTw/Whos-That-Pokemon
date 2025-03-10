@@ -1,4 +1,4 @@
-@import '../assets/variables.scss';
+@use '../assets/variables.scss';
 
 .buttons {
   @include option_button();

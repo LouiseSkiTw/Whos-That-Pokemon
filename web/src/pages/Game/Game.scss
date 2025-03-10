@@ -1,4 +1,4 @@
-@import '../../assets/_variables.scss';
+@use '../../assets/_variables.scss';
 
 .container {
     @include app_container();
@@ -58,7 +58,8 @@
 .silhouette {
     width: 400px;
     height: 400px;
-    filter: brightness(0);
+    filter: brightness(0) invert(100);
+    background-color: black;
 }
 
 .show {

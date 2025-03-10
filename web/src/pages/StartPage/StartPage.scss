@@ -1,4 +1,4 @@
-@import '../../assets/_variables.scss';
+@use '../../assets/_variables.scss';
 
 .container {
   @include app_container();
